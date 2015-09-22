@@ -1,0 +1,18 @@
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (add-to-list
+   'package-archives
+   '("melpa" . "http://melpa.org/packages/")
+   t)
+  (package-initialize))
+
+(add-to-list 'load-path "~/.emacs.d/lisp")
+
+;; auto-complete stuff
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+(defun ac-common-setup ()
+  (setq ac-sources (append ac-sources '(ac-source-gtags))))
+
+(ido-mode t)
