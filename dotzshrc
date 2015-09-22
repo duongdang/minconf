@@ -1,0 +1,56 @@
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+case $TERM in (xterm*)
+    bindkey '\eOH' beginning-of-line
+    bindkey '\eOF' end-of-line
+esac
+
+#And DEL too, as well as PGDN and insert:
+bindkey '^[[3~' delete-char
+bindkey '^[[6~' end-of-history
+#bindkey '\e[2~' redisplay
+
+#Now bind pgup to paste the last word of the last command,
+bindkey '\e[5~' insert-last-word
+
+bindkey ';5D' emacs-backward-word
+bindkey ';5C' emacs-forward-word
+#bindkey ';5?' backward-kill-word
+
+setopt sharehistory histappend
+# number of lines kept in history
+export HISTSIZE=10000
+# number of lines saved in the history after logout
+export SAVEHIST=10000
+# location of history
+export HISTFILE=~/.zhistory
+setopt SHARE_HISTORY
+# append command to history file once executed
+setopt inc_append_history
+setopt hist_verify
+setopt hist_ignore_dups
+setopt extended_history
+# ----------------- pushd ----------------------------
+DIRSTACKSIZE=20
+setopt autopushd pushdminus pushdsilent pushdtohome
+alias dh='dirs -v'
+# -----------------complteion ----------------------------
+autoload -U compinit compinit
+
+# ----------------- correction --------------------------
+setopt correct
+
+# Don't complete backup files as executables
+zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
+
+alias ls='ls --color=auto'
+alias ll='ls -l --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+setopt prompt_subst
+
+autoload -U colors && colors
+PROMPT="%U%m%u%{$fg[yellow]$bg[black]%}%B:%30<..<%~%]%b%# "
+RPROMPT="%{$fg[red]%}%(?..exited %?)%{$reset_color%} %T"
