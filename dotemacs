@@ -17,6 +17,7 @@
 
 (ido-mode t)
 
+
 (require 'color-theme)
 (load-theme 'wombat)
 
@@ -28,3 +29,6 @@
  kept-new-versions 6
  kept-old-versions 2
  version-control t)       ; use versioned backups	
+=======
+(put 'narrow-to-region 'disabled nil)
+

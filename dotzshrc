@@ -54,3 +54,4 @@ setopt prompt_subst
 autoload -U colors && colors
 PROMPT="%U%m%u%{$fg[yellow]$bg[black]%}%B:%30<..<%~%]%b%# "
 RPROMPT="%{$fg[red]%}%(?..exited %?)%{$reset_color%} %T"
+export PATH=/home/cloudera/anaconda/bin:/home/cloudera/anaconda/bin:/usr/local/bin:/bin:/usr/bin
