@@ -33,3 +33,6 @@
 (put 'narrow-to-region 'disabled nil)
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+	
