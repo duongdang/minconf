@@ -57,3 +57,23 @@ RPROMPT="%{$fg[red]%}%(?..exited %?)%{$reset_color%} %T"
 export PATH=/home/cloudera/anaconda/bin:/home/cloudera/anaconda/bin:/usr/local/bin:/bin:/usr/bin
 
 export PYTHONPATH=$PYTHONPATH:/home/ndang/local/lib/python2.7/site-packages/
+# Set up terminal title
+extract_title(){
+    cmd=$(echo $1 | sed 's/\(\<[[:alnum:]_]*=[^ \t\r\n\v\f]*\)//g')
+    s=${cmd## }
+    a=("${(s/ /)s}")
+    echo $a[1]
+}
+
+case $TERM in
+    xterm*)
+      preexec () {
+        title=$(extract_title $*)
+        print -Pn "\e]0;$title\a"
+      }
+    ;;
+esac
+
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
+
+export PATH=$HOME/anaconda2/bin/:$PATH
