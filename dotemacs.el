@@ -1,9 +1,9 @@
 (when (>= emacs-major-version 24)
   (require 'package)
-  (add-to-list
-   'package-archives
-   '("melpa" . "http://melpa.org/packages/")
-   t)
+  (add-to-list 'package-archives
+  	       '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives
+	       '("melpa-stable" . "http://stable.melpa.org/packages/") t)
   (package-initialize))
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
@@ -24,15 +24,18 @@
 (setq
  backup-by-copying t      ; don't clobber symlinks
  backup-directory-alist
- '(("." . "~/.saves"))    ; don't litter my fs tree	
+ '(("." . "~/.saves"))    ; don't litter my fs tree
  delete-old-versions t
  kept-new-versions 6
  kept-old-versions 2
- version-control t)       ; use versioned backups	
+ version-control t)       ; use versioned backups
 
 (put 'narrow-to-region 'disabled nil)
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-	
+
+(require 'ensime)
+(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+(add-hook 'java-mode-hook 'ensime-scala-mode-hook)
