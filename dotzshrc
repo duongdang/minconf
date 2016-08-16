@@ -78,3 +78,5 @@ export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
 
 export PATH=$HOME/anaconda2/bin/:$PATH
 export PATH=$HOME/scripts/:$PATH
+
+alias ee='emacs -q -nw --no-site -eval "(progn (setq inhibit-startup-message t)(global-font-lock-mode t))"
