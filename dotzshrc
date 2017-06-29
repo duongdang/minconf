@@ -54,7 +54,6 @@ setopt prompt_subst
 autoload -U colors && colors
 PROMPT="%U%m%u%{$fg[yellow]$bg[black]%}%B:%30<..<%~%]%b%# "
 RPROMPT="%{$fg[red]%}%(?..exited %?)%{$reset_color%} %T"
-export PATH=/home/cloudera/anaconda/bin:/home/cloudera/anaconda/bin:/usr/local/bin:/bin:/usr/bin
 
 # export PYTHONPATH=$PYTHONPATH:/home/ndang/local/lib/python2.7/site-packages/
 # Set up terminal title
@@ -74,9 +73,9 @@ case $TERM in
     ;;
 esac
 
-export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
+# export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
 
 export PATH=$HOME/anaconda2/bin/:$PATH
 export PATH=$HOME/scripts/:$PATH
 
-alias ee='emacs -q -nw --no-site -eval "(progn (setq inhibit-startup-message t)(global-font-lock-mode t))"
+alias ee='emacs -q -nw --no-site -eval "(progn (setq inhibit-startup-message t)(global-font-lock-mode t))"'
