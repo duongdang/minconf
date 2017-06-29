@@ -66,3 +66,6 @@
 (add-hook 'lisp-mode-hook       'hs-minor-mode)
 (add-hook 'perl-mode-hook       'hs-minor-mode)
 (add-hook 'sh-mode-hook         'hs-minor-mode)
+
+(menu-bar-mode nil)
+(tool-bar-mode nil)
