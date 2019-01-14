@@ -82,5 +82,3 @@ alias ee='emacs -q -nw --no-site -eval "(progn (setq inhibit-startup-message t)(
 alias ll="ls -l"
 
 export TERM=xterm-256color
-
-export PATH="/data/miniconda3/bin:$PATH"
