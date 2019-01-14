@@ -15,7 +15,7 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-(setq package-list '(auto-complete ensime better-defaults material-theme elpy py-autopep8 color-theme anaconda-mode))
+(setq package-list '(auto-complete ensime better-defaults material-theme elpy py-autopep8 color-theme anaconda-mode markdown-mode))
 
 ; install the missing packages
 (dolist (package package-list)
@@ -96,3 +96,41 @@
 (add-hook 'python-mode-hook 'anaconda-mode)
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (anaconda-mode color-theme py-autopep8 elpy material-theme better-defaults ensime auto-complete))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
+(add-hook 'prog-mode-hook
+          (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))
+(defun xah-clean-empty-lines ()
+  (interactive)
+  (let ($begin $end)
+    (if (region-active-p)
+        (setq $begin (region-beginning) $end (region-end))
+      (setq $begin (point-min) $end (point-max)))
+    (save-excursion
+      (save-restriction
+        (narrow-to-region $begin $end)
+        (progn
+          (goto-char (point-min))
+          (while (re-search-forward "\n\n\n+" nil "move")
+            (replace-match "\n\n")))))))
+
+(add-hook 'prog-mode-hook
+          (lambda () (add-to-list 'write-file-functions 'delete-trailing-whitespace)))

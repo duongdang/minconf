@@ -43,11 +43,13 @@ setopt correct
 # Don't complete backup files as executables
 zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
 
-alias ls='ls --color=auto'
-alias ll='ls -l --color=auto'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+if [ "$(uname 2> /dev/null)" != "Linux" ]; then
+    alias ls='ls -G'
+    alias ll='ls -l -G'
+    alias grep='grep -G'
+    alias fgrep='fgrep -G'
+    alias egrep='egrep -G'
+fi
 
 setopt prompt_subst
 
@@ -75,17 +77,10 @@ esac
 
 # export JAVA_HOME=/usr/lib/jvm/java-8-oracle/
 
-export PATH=$HOME/anaconda2/bin/:$PATH
-export PATH=$HOME/scripts/:$PATH
-
 alias ee='emacs -q -nw --no-site -eval "(progn (setq inhibit-startup-message t)(global-font-lock-mode t))"'
 
 alias ll="ls -l"
 
-# added by Miniconda3 installer
-export PATH="/space/duong/miniconda3/bin:$PATH"
-export GUROBI_HOME="/opt/gurobi752/linux64"
-export PATH="${PATH}:${GUROBI_HOME}/bin"
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
-
 export TERM=xterm-256color
+
+export PATH="/data/miniconda3/bin:$PATH"
