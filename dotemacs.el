@@ -8,14 +8,14 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
-; activate all the packages (in particular autoloads)
-(package-initialize)
 
 ; fetch the list of packages available
 (unless package-archive-contents
   (package-refresh-contents))
 
-(setq package-list '(auto-complete ensime better-defaults material-theme elpy py-autopep8 color-theme groovy-mode ws-butler fill-column-indicator flycheck magit))
+(setq package-list '(auto-complete better-defaults material-theme elpy py-autopep8 elpy
+				   color-theme groovy-mode ws-butler fill-column-indicator flycheck
+				   magit anaconda-mode cmake-ide string-inflection))
 
 ; install the missing packages
 (dolist (package package-list)
@@ -47,9 +47,9 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
-(require 'ensime)
-(add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
-(add-hook 'java-mode-hook 'ensime-scala-mode-hook)
+;; (require 'ensime)
+;; (add-hook 'scala-mode-hook 'ensime-scala-mode-hook)
+;; (add-hook 'java-mode-hook 'ensime-scala-mode-hook)
 
 (defun toggle-selective-display (column)
   (interactive "P")
@@ -95,7 +95,7 @@
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
-(setq-default fill-column 100)
+(setq-default fill-column 80)
 
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 
@@ -107,6 +107,7 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+(setq-default fill-column 88)
 
 (defun xah-clean-empty-lines ()
   "Replace repeated blank lines to just 1.
@@ -134,12 +135,15 @@ Version 2017-09-22"
 ;; (add-hook 'prog-mode-hook
 ;;  	  (lambda () (add-to-list 'write-file-functions 'xah-clean-empty-lines)))
 
+
 (require 'blacken)
-(defvar blacken-line-length 99)
+(defvar blacken-line-length 88)
 (add-hook 'python-mode-hook 'blacken-mode)
 
 (global-flycheck-mode)
+(setq-default flycheck-flake8-maximum-line-length 88)
 (column-number-mode 1)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -148,10 +152,18 @@ Version 2017-09-22"
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (magit yasnippet-snippets yaml-mode ws-butler pylint py-autopep8 material-theme groovy-mode flymake-python-pyflakes flymake-cursor flycheck fill-column-indicator ensime elpy dracula-theme color-theme better-defaults auto-complete anaconda-mode))))
+    (string-inflection magit yasnippet-snippets yaml-mode ws-butler pylint py-autopep8 material-theme groovy-mode flymake-python-pyflakes flymake-cursor flycheck fill-column-indicator ensime elpy dracula-theme color-theme better-defaults auto-complete anaconda-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(add-hook 'python-mode-hook 'anaconda-mode)
+(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+
+;; (require 'rtags) ;; optional, must have rtags installed
+;; (cmake-ide-setup)
+
+(require 'string-inflection)
