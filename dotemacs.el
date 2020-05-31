@@ -88,10 +88,6 @@
 (load-theme 'material t) ;; load material theme
 ; (global-linum-mode t) ;; enable line numbers globally
 
-;; (elpy-enable)
-;; (require 'py-autopep8)
-;; (add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-;; (add-hook 'python-mode-hook 'anaconda-mode)
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
@@ -135,15 +131,28 @@ Version 2017-09-22"
 ;; (add-hook 'prog-mode-hook
 ;;  	  (lambda () (add-to-list 'write-file-functions 'xah-clean-empty-lines)))
 
+;; PYTHON SETUP
 
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
+
+;; (add-hook 'elpy-mode-hook (lambda ()
+;;                             (add-hook 'before-save-hook
+;;                                       'elpy-black-fix-code nil t)))
 (require 'blacken)
 (defvar blacken-line-length 88)
 (add-hook 'python-mode-hook 'blacken-mode)
 
-(global-flycheck-mode)
-(setq-default flycheck-flake8-maximum-line-length 88)
-(column-number-mode 1)
+;; (global-flycheck-mode)
+;; (setq-default flycheck-flake8-maximum-line-length 88)
+;; (column-number-mode 1)
 
+;; (add-hook 'python-mode-hook 'anaconda-mode)
+;; (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+
+;; END PYTHON SETUP
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -160,8 +169,6 @@ Version 2017-09-22"
  ;; If there is more than one, they won't work right.
  )
 
-(add-hook 'python-mode-hook 'anaconda-mode)
-(add-hook 'python-mode-hook 'anaconda-eldoc-mode)
 
 ;; (require 'rtags) ;; optional, must have rtags installed
 ;; (cmake-ide-setup)
